@@ -1,0 +1,7 @@
+.recipeCard{
+  min-height: 25rem;
+}
+
+.cardImage{
+  cursor: pointer;
+}
