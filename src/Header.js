@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import{Container,Row,Col,Form,Card} from 'react-bootstrap'
 import './Header.css'
+import axios from 'axios'
 const db = require('./testdb.js')
 
 const Header = () => {
@@ -11,10 +12,19 @@ const Header = () => {
   
   useEffect(() => {
     getRecipes()
+
   },[query])
 
   const getRecipes = () => {
-    setRecipes(db)
+
+    axios
+    .post('/api/getRecipes',{
+      data: query
+    })
+    .then(res => {
+      console.log('res',res.data)
+      setRecipes(res.data)
+    })
   }
 
   const onUpdate = e => {
@@ -43,13 +53,13 @@ const Header = () => {
       </Row>
       <Row>
         {
-          recipes.map(({imgURL,title,author}) => 
+          recipes.map(({imgURL,title,description}) => 
             <Col className='my-4' lg={4}>
               <Card className='recipeCard'>
                 <Card.Img className='img-fluid cardImage ' variant='top' src={imgURL}/>
                 <Card.Body className=''>
                   <Card.Title className='text-capitalize cardTitle'>{title}</Card.Title>
-                  <Card.Text className=''>By <a href="#">{author}</a></Card.Text>
+                  <Card.Text className=''>{description}</Card.Text>
                   <footer>
                     
                   </footer>
