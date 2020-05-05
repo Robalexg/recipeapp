@@ -17,18 +17,18 @@ const thumbDescription = (str) => {
     return description
   }
 
-  return ''
+  return 'No Description'
 }
 
 
 
-app.get('/', function (req, res) {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, +'../build/index.html'));
 });
 
 
 
-app.post('/api/getRecipes', function (req, res) {
+app.post('/api/getRecipes',  (req, res) => {
   var query = req.body.data
   var recipes = []
   axios({
@@ -69,8 +69,3 @@ app.post('/api/getRecipes', function (req, res) {
 
 app.listen(process.env.PORT || 8080);
 console.log("connected")
-
-
-
-
-
