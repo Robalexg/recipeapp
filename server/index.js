@@ -45,6 +45,7 @@ app.post('/api/getRecipes',  (req, res) => {
       })
       .then((response) => {
         response.data.results.map((recipe) => {
+          console.log("recipe",recipe)
           var obj = {}
           obj.title = recipe.name
           obj.imgURL = recipe.thumbnail_url
